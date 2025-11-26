@@ -1,13 +1,18 @@
 package main
 
-import "fmt"
+import (
+"fmt"
+"net/http"
+"time"
+)
 
 func main() {
-	// Week 04: ここに課題のコードを記述してください
-	// 詳細な課題内容はLMSで確認してください
-	
-	fmt.Println("Week 04 課題")
-	
-	// 以下に実装してください
-	
+http.HandleFunc("/info", info)
+http.ListenAndServe(":8080", nil)
+}
+
+func info(w http.ResponseWriter, r *http.Request){
+current :=time.Now().Format("21:23")
+burauza :=r.Header.Get("User-Agent")
+fmt.Fprintln( w, "現在時刻", current,"今使っているブラウザは",burauza, "です")
 }
